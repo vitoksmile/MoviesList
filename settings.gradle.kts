@@ -19,5 +19,9 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "MoviesList"
 include(":app")
+include(":domain")
+include(":data")

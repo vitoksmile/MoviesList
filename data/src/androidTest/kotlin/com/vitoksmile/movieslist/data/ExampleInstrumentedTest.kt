@@ -1,4 +1,4 @@
-package com.vitoksmile.movieslist
+package com.vitoksmile.movieslist.data
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.vitoksmile.movieslist", appContext.packageName)
+        assertEquals("com.vitoksmile.movieslist.data.test", appContext.packageName)
     }
 }
