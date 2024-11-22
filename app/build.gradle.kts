@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
     alias(libs.plugins.dagger.hilt)
 }
@@ -52,6 +53,7 @@ dependencies {
     implementation(projects.domain)
 
     implementation(libs.kotlin.datetime)
+    implementation(libs.kotlin.serialization)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
@@ -65,6 +67,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation)
+    implementation(libs.androidx.navigation.hilt)
 
     implementation(libs.coil.core)
     implementation(libs.coil.network)

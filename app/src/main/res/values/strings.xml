@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MoviesList</string>
-
-    <string name="overview_error">Failed to load movies</string>
+    <string name="failed_to_load">Failed to load</string>
+    <string name="vote">%.1f</string>
+    <string name="release_date">Release date: %s</string>
+    <string name="genres">Genres: %s</string>
+    <string name="production_companies">Production companies:</string>
+    <string name="date_format">yyyy/MM/d</string>
+    <string name="back">Back</string>
+    <string name="accessibility_vote">Vote %.1f</string>
 </resources>

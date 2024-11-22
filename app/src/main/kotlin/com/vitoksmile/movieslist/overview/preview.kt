@@ -9,7 +9,6 @@ val previewEvents: OverviewUiEvents
     @Composable
     get() = remember {
         object : OverviewUiEvents {
-            override fun reloadData() {}
             override fun onMovieClicked(movie: Movie) {}
         }
     }

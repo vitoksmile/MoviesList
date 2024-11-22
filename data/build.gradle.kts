@@ -68,7 +68,10 @@ dependencies {
     implementation(libs.okhttp3)
     implementation(libs.okhttp3.logging)
 
+    testImplementation(libs.kotlin.coroutines.test)
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

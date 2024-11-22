@@ -1,4 +1,4 @@
-package com.vitoksmile.movieslist.overview.components
+package com.vitoksmile.movieslist.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

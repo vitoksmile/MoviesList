@@ -5,6 +5,8 @@ package com.vitoksmile.movieslist.overview
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vitoksmile.movieslist.navigation.NavigationManager
+import com.vitoksmile.movieslist.details.DetailsScreenDestination
 import com.vitoksmile.movieslist.domain.models.Movie
 import com.vitoksmile.movieslist.domain.usecase.GetMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OverviewViewModel @Inject constructor(
     getMovies: GetMoviesUseCase,
+    private val navigationManager: NavigationManager,
 ) : ViewModel(), OverviewUiEvents {
 
     val uiState: StateFlow<OverviewUiState> =
@@ -28,9 +31,15 @@ class OverviewViewModel @Inject constructor(
                     onFailure = { OverviewUiState.Error(it.toString()) }
                 )
             }
-            .stateIn(viewModelScope, SharingStarted.Lazily, initialValue = OverviewUiState.Loading)
+            .stateIn(
+                viewModelScope,
+                SharingStarted.Lazily,
+                initialValue = OverviewUiState.Loading,
+            )
 
-    override fun onMovieClicked(movie: Movie) {}
+    override fun onMovieClicked(movie: Movie) {
+        navigationManager.navigate(DetailsScreenDestination(movie.id))
+    }
 }
 
 @Immutable

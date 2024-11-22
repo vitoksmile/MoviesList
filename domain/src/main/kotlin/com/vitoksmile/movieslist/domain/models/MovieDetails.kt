@@ -10,6 +10,5 @@ data class MovieDetails(
     val genres: List<String>,
     val releaseDate: LocalDate,
     val vote: Double,
-    val voteCount: Int,
-    val productionCompanies: List<MovieProductionCompany>,
+    val productionCompanies: List<ProductionCompany>,
 )

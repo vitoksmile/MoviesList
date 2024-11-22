@@ -33,15 +33,13 @@ data class MovieDetailsModel(
     @SerialName("overview")
     val overview: String,
     @SerialName("poster_path")
-    val posterUrl: String,
-    @SerialName("genre_ids")
-    val genreIds: List<Int>,
+    val posterPath: String,
+    @SerialName("genres")
+    val genres: List<GenreModel>,
     @SerialName("release_date")
     val releaseDate: String,
     @SerialName("vote_average")
-    val vote: String,
-    @SerialName("vote_count")
-    val voteCount: String,
+    val vote: Double,
     @SerialName("production_companies")
     val productionCompanies: List<ProductionCompanyModel>,
 )
@@ -63,7 +61,7 @@ data class GenreModel(
 @Serializable
 data class ProductionCompanyModel(
     @SerialName("name")
-    val title: Int,
+    val name: String,
     @SerialName("logo_path")
-    val logoUrl: String?,
+    val logoPath: String?,
 )

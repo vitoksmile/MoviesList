@@ -1,10 +1,14 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.vitoksmile.movieslist.overview
+package com.vitoksmile.movieslist.details
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -15,34 +19,53 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vitoksmile.movieslist.R
+import com.vitoksmile.movieslist.domain.models.MovieId
 import com.vitoksmile.movieslist.components.ErrorView
 import com.vitoksmile.movieslist.components.LoadingView
-import com.vitoksmile.movieslist.overview.components.MoviesView
+import com.vitoksmile.movieslist.details.components.DetailsView
 import com.vitoksmile.movieslist.ui.theme.MoviesListTheme
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object OverviewScreenDestination
+data class DetailsScreenDestination(
+    val movieId: MovieId,
+)
 
 @Composable
-fun OverviewScreen(viewModel: OverviewViewModel) {
+fun DetailsScreen(viewModel: DetailsViewModel) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-    OverviewScreen(
-        events = viewModel,
-        state = state
-    )
+    DetailsScreen(events = viewModel, state = state)
 }
 
 @Composable
-private fun OverviewScreen(
-    events: OverviewUiEvents,
-    state: OverviewUiState,
+private fun DetailsScreen(
+    events: DetailsUiEvents,
+    state: DetailsUiState,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.app_name)) },
+                title = {
+                    when (state) {
+                        is DetailsUiState.Loading -> {}
+                        is DetailsUiState.Error -> {}
+
+                        is DetailsUiState.Success -> {
+                            Text(state.movie.title)
+                        }
+                    }
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = events::navigateBack,
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.back),
+                        )
+                    }
+                }
             )
         }
     ) { paddingValues ->
@@ -52,16 +75,16 @@ private fun OverviewScreen(
             label = "",
         ) {
             when (it) {
-                is OverviewUiState.Loading -> {
+                is DetailsUiState.Loading -> {
                     LoadingView()
                 }
 
-                is OverviewUiState.Error -> {
+                is DetailsUiState.Error -> {
                     ErrorView(it.message)
                 }
 
-                is OverviewUiState.Success -> {
-                    MoviesView(events, it.movies)
+                is DetailsUiState.Success -> {
+                    DetailsView(it.movie)
                 }
             }
         }
@@ -72,9 +95,9 @@ private fun OverviewScreen(
 @Preview
 private fun SuccessStatePreview() {
     MoviesListTheme {
-        OverviewScreen(
+        DetailsScreen(
             events = previewEvents,
-            state = OverviewUiState.Success(previewMovies)
+            state = DetailsUiState.Success(previewDetails)
         )
     }
 }
@@ -83,9 +106,9 @@ private fun SuccessStatePreview() {
 @Preview
 private fun LoadingStatePreview() {
     MoviesListTheme {
-        OverviewScreen(
+        DetailsScreen(
             events = previewEvents,
-            state = OverviewUiState.Loading,
+            state = DetailsUiState.Loading,
         )
     }
 }
@@ -94,9 +117,9 @@ private fun LoadingStatePreview() {
 @Preview
 private fun ErrorStatePreview() {
     MoviesListTheme {
-        OverviewScreen(
+        DetailsScreen(
             events = previewEvents,
-            state = OverviewUiState.Error("Unknown error"),
+            state = DetailsUiState.Error("Unknown error"),
         )
     }
 }

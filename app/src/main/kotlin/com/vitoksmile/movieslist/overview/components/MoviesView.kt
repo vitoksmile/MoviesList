@@ -18,7 +18,7 @@ import com.vitoksmile.movieslist.overview.previewMovies
 import com.vitoksmile.movieslist.ui.theme.MoviesListTheme
 
 @Composable
-fun SuccessView(
+fun MoviesView(
     events: OverviewUiEvents,
     movies: List<Movie>,
 ) {
@@ -42,9 +42,9 @@ fun SuccessView(
 
 @Composable
 @Preview
-private fun SuccessViewPreview() {
+private fun MoviesViewPreview() {
     MoviesListTheme {
-        SuccessView(
+        MoviesView(
             events = previewEvents,
             movies = previewMovies,
         )

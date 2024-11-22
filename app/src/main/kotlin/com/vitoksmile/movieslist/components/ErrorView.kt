@@ -1,4 +1,4 @@
-package com.vitoksmile.movieslist.overview.components
+package com.vitoksmile.movieslist.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,7 +26,7 @@ fun ErrorView(message: String) {
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
     ) {
         Text(
-            text = stringResource(R.string.overview_error),
+            text = stringResource(R.string.failed_to_load),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.error,
             textAlign = TextAlign.Center,
