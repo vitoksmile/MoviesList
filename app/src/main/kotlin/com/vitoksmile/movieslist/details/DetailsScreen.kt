@@ -2,6 +2,7 @@
 
 package com.vitoksmile.movieslist.details
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -39,7 +40,8 @@ fun DetailsScreen(viewModel: DetailsViewModel) {
 }
 
 @Composable
-private fun DetailsScreen(
+@VisibleForTesting
+fun DetailsScreen(
     events: DetailsUiEvents,
     state: DetailsUiState,
 ) {

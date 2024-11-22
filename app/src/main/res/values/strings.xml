@@ -8,4 +8,5 @@
     <string name="date_format">yyyy/MM/d</string>
     <string name="back">Back</string>
     <string name="accessibility_vote">Vote %.1f</string>
+    <string name="accessibility_movie_card">%1$s, vote: %2$.2f, genres: %3$s</string>
 </resources>

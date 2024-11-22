@@ -2,6 +2,7 @@
 
 package com.vitoksmile.movieslist.overview
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -35,7 +36,8 @@ fun OverviewScreen(viewModel: OverviewViewModel) {
 }
 
 @Composable
-private fun OverviewScreen(
+@VisibleForTesting
+fun OverviewScreen(
     events: OverviewUiEvents,
     state: OverviewUiState,
 ) {
