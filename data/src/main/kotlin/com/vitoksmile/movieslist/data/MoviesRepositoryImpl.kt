@@ -1,27 +1,22 @@
 package com.vitoksmile.movieslist.data
 
+import com.vitoksmile.movieslist.data.source.remote.RemoteDataSource
 import com.vitoksmile.movieslist.domain.MoviesRepository
 import com.vitoksmile.movieslist.domain.models.Movie
 import com.vitoksmile.movieslist.domain.models.MovieDetails
 import com.vitoksmile.movieslist.domain.models.MovieId
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
-internal class MoviesRepositoryImpl @Inject constructor() : MoviesRepository {
+internal class MoviesRepositoryImpl @Inject constructor(
+    private val remoteDataSource: RemoteDataSource,
+) : MoviesRepository {
 
     override fun getMovies(): Flow<Result<List<Movie>>> {
-        return flowOf(Result.success(List(10) { index ->
-            Movie(
-                id = index,
-                title = "Title $index",
-                posterUrl = "https://picsum.photos/id/$index/200/300",
-                genres = listOf("Science Fiction", "Action", "Adventure").shuffled(),
-            )
-        }))
+        return remoteDataSource.getAll().mapToResult()
     }
 
     override fun getMovieDetails(id: MovieId): Flow<Result<MovieDetails>> {
-        return flowOf(Result.failure(NotImplementedError()))
+        return remoteDataSource.getDetails(id).mapToResult()
     }
 }

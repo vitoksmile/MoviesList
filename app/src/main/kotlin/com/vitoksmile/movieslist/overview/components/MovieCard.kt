@@ -56,14 +56,21 @@ fun MovieCard(
                     )
             )
 
+            VoteView(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(8.dp),
+                vote = movie.vote,
+            )
+
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(horizontal = 4.dp)
+                    .padding(8.dp),
             ) {
                 Text(
                     text = movie.title,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleLarge,
                     color = Color.White,
                 )
 

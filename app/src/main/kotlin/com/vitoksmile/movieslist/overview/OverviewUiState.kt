@@ -8,8 +8,12 @@ sealed interface OverviewUiState {
 
     data object Loading : OverviewUiState
 
-    data object Error : OverviewUiState
+    data class Error(
+        val message: String,
+    ) : OverviewUiState
 
     @Immutable
-    data class Success(val movies: List<Movie>) : OverviewUiState
+    data class Success(
+        val movies: List<Movie>,
+    ) : OverviewUiState
 }

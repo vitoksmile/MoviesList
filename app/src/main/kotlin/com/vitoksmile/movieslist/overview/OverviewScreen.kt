@@ -10,14 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.vitoksmile.movieslist.R
-import com.vitoksmile.movieslist.domain.models.Movie
 import com.vitoksmile.movieslist.overview.components.ErrorView
 import com.vitoksmile.movieslist.overview.components.LoadingView
 import com.vitoksmile.movieslist.overview.components.SuccessView
@@ -57,7 +55,7 @@ private fun OverviewScreen(
                 }
 
                 is OverviewUiState.Error -> {
-                    ErrorView(events)
+                    ErrorView(it.message)
                 }
 
                 is OverviewUiState.Success -> {
@@ -72,20 +70,9 @@ private fun OverviewScreen(
 @Preview
 private fun SuccessStatePreview() {
     MoviesListTheme {
-        val movies = remember {
-            List(10) { index ->
-                Movie(
-                    id = index,
-                    title = "Title $index",
-                    posterUrl = "",
-                    genres = listOf("Science Fiction", "Action", "Adventure"),
-                )
-            }
-        }
-
         OverviewScreen(
             events = previewEvents,
-            state = OverviewUiState.Success(movies)
+            state = OverviewUiState.Success(previewMovies)
         )
     }
 }
@@ -107,7 +94,7 @@ private fun ErrorStatePreview() {
     MoviesListTheme {
         OverviewScreen(
             events = previewEvents,
-            state = OverviewUiState.Error,
+            state = OverviewUiState.Error("Unknown error"),
         )
     }
 }

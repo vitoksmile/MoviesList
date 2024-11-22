@@ -2,5 +2,4 @@
     <string name="app_name">MoviesList</string>
 
     <string name="overview_error">Failed to load movies</string>
-    <string name="overview_try_again">Try again</string>
 </resources>

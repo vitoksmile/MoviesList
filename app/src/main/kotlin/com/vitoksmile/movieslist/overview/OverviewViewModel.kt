@@ -25,20 +25,16 @@ class OverviewViewModel @Inject constructor(
             .mapLatest { result ->
                 result.fold(
                     onSuccess = { OverviewUiState.Success(it) },
-                    onFailure = { OverviewUiState.Error }
+                    onFailure = { OverviewUiState.Error(it.toString()) }
                 )
             }
             .stateIn(viewModelScope, SharingStarted.Lazily, initialValue = OverviewUiState.Loading)
-
-    override fun reloadData() {}
 
     override fun onMovieClicked(movie: Movie) {}
 }
 
 @Immutable
 interface OverviewUiEvents {
-
-    fun reloadData()
 
     fun onMovieClicked(movie: Movie)
 }
